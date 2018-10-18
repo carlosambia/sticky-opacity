@@ -38,7 +38,6 @@ h2{
 
 
 .sticky-text{
-	margin-top: 300px;
 	z-index: 999;
     position: relative;
     color: white;
@@ -130,40 +129,44 @@ h2{
 
 
 <script>
+var header = $('figure');
+
+// on init
+$(window).ready( scrollHandler );
+
+
+function scrollHandler() {
+
+	var scrollInit = $('.container-sticky').offset().top,
+		scrollCurrent = $(window).scrollTop(),
+ 		height = $('.sticky-text').outerHeight(),
+		totalP = 0.75;
+
+	var p = (scrollCurrent-scrollInit)*totalP/height;
+	var opacity = 1-p;
+
+	header.css({ 'opacity': opacity });
+
+}
+
 
 
 $(".modulo-sticky").stick_in_parent()
   .on("sticky_kit:stick", function(e) {
     console.log("has stuck!", e.target);
+    $(window).on('scroll', scrollHandler);
   })
   .on("sticky_kit:bottom", function(e) {
     console.log("has unstuck!", e.target);
+   
+}).on("sticky_kit:unstick",function(e){
+	 $(window).off('scroll', scrollHandler);
 });
 
 
-var header = $('figure');
-var range = 500;
 
 
 
-
-
-$(window).on('scroll', function () {
-  
-  var scrollTop = $(this).scrollTop(),
-      height = header.outerHeight(),
-      offset = height,
-      calc = 1 - (scrollTop - offset + range) / range;
-
-  header.css({ 'opacity': calc });
-
-  if (calc > '1') {
-    header.css({ 'opacity': 1 });
-  } else if ( calc < '0.3' ) {
-    header.css({ 'opacity': 0.3 });
-  }
-  
-});
 
 </script>
 
