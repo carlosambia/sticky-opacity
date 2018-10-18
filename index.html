@@ -100,28 +100,28 @@ h2{
 
 <div class="container-sticky">
 
-<div class="modulo-sticky">
-	<figure class="first"></figure>
-</div>
+	<div class="modulo-sticky">
+		<figure class="first"></figure>
+	</div>
 
-<div class="sticky-text">
-	<h2>Titulo de Módulo</h2>
-	<p>Praesent ut finibus ligula. Proin neque tellus, lobortis a urna ac, pulvinar ornare justo. Donec blandit neque sit amet hendrerit consequat. Proin eu erat facilisis, scelerisque erat at, accumsan velit. Donec non consequat sapien. Sed faucibus, tellus eu rhoncus iaculis, sapien tortor condimentum diam, sit amet convallis justo massa quis tellus. Praesent varius nunc vel lobortis hendrerit. Ut pharetra, ipsum ut mollis vestibulum, mauris justo aliquam turpis, non elementum orci odio a augue. Donec quis nibh vel risus ullamcorper elementum at non leo. Nulla mollis erat eu metus tincidunt euismod. Etiam sed pretium dui. In molestie aliquet tellus. Vivamus non volutpat tortor.</p>
-</div>
+	<div class="sticky-text">
+		<h2>Titulo de Módulo</h2>
+		<p>Praesent ut finibus ligula. Proin neque tellus, lobortis a urna ac, pulvinar ornare justo. Donec blandit neque sit amet hendrerit consequat. Proin eu erat facilisis, scelerisque erat at, accumsan velit. Donec non consequat sapien. Sed faucibus, tellus eu rhoncus iaculis, sapien tortor condimentum diam, sit amet convallis justo massa quis tellus. Praesent varius nunc vel lobortis hendrerit. Ut pharetra, ipsum ut mollis vestibulum, mauris justo aliquam turpis, non elementum orci odio a augue. Donec quis nibh vel risus ullamcorper elementum at non leo. Nulla mollis erat eu metus tincidunt euismod. Etiam sed pretium dui. In molestie aliquet tellus. Vivamus non volutpat tortor.</p>
+	</div>
 
 </div>
 
 
 <div class="container-sticky">
 
-<div class="modulo-sticky">
-	<figure class="second"></figure>
-</div>
+	<div class="modulo-sticky">
+		<figure class="second"></figure>
+	</div>
 
-<div class="sticky-text">
-	<h2>Titulo de Módulo</h2>
-	<p>Praesent ut finibus ligula. Proin neque tellus, lobortis a urna ac, pulvinar ornare justo. Donec blandit neque sit amet hendrerit consequat. Proin eu erat facilisis, scelerisque erat at, accumsan velit. Donec non consequat sapien. Sed faucibus, tellus eu rhoncus iaculis, sapien tortor condimentum diam, sit amet convallis justo massa quis tellus. Praesent varius nunc vel lobortis hendrerit. Ut pharetra, ipsum ut mollis vestibulum, mauris justo aliquam turpis, non elementum orci odio a augue. Donec quis nibh vel risus ullamcorper elementum at non leo. Nulla mollis erat eu metus tincidunt euismod. Etiam sed pretium dui. In molestie aliquet tellus. Vivamus non volutpat tortor.</p>
-</div>
+	<div class="sticky-text">
+		<h2>Titulo de Módulo</h2>
+		<p>Praesent ut finibus ligula. Proin neque tellus, lobortis a urna ac, pulvinar ornare justo. Donec blandit neque sit amet hendrerit consequat. Proin eu erat facilisis, scelerisque erat at, accumsan velit. Donec non consequat sapien. Sed faucibus, tellus eu rhoncus iaculis, sapien tortor condimentum diam, sit amet convallis justo massa quis tellus. Praesent varius nunc vel lobortis hendrerit. Ut pharetra, ipsum ut mollis vestibulum, mauris justo aliquam turpis, non elementum orci odio a augue. Donec quis nibh vel risus ullamcorper elementum at non leo. Nulla mollis erat eu metus tincidunt euismod. Etiam sed pretium dui. In molestie aliquet tellus. Vivamus non volutpat tortor.</p>
+	</div>
 
 </div>
 
@@ -151,38 +151,41 @@ h2{
 
 
 <script>
-var header = $('figure');
-
-// on init
-$(window).ready( scrollHandler );
-
-
 function scrollHandler() {
-
-	var scrollInit = $('.container-sticky').offset().top,
+	var parent = $(target).parent('.container-sticky'),
+		text = parent.children('.sticky-text'),
+  		scrollInit = parent.offset().top,
 		scrollCurrent = $(window).scrollTop(),
- 		height = $('.sticky-text').outerHeight(),
+ 		height = text.outerHeight(),
 		totalP = 0.75;
 
 	var p = (scrollCurrent-scrollInit)*totalP/height;
 	var opacity = 1-p;
 
-	header.css({ 'opacity': opacity });
-
+	$(target).children('figure').css({ 'opacity': opacity });
 }
-
 
 
 $(".modulo-sticky").stick_in_parent()
   .on("sticky_kit:stick", function(e) {
     console.log("has stuck!", e.target);
-    $(window).on('scroll', scrollHandler);
+    target = e.target
+    scrollHandler()
+    $(window).on('scroll', scrollHandler );
+  })
+  .on("sticky_kit:unbottom",function(e){
+	console.log('unbottom')
+	target = e.target
+	scrollHandler()
+    $(window).on('scroll', scrollHandler );
   })
   .on("sticky_kit:bottom", function(e) {
     console.log("has unstuck!", e.target);
+    $(window).off('scroll', scrollHandler );
    
-}).on("sticky_kit:unstick",function(e){
-	 $(window).off('scroll', scrollHandler);
+  }).on("sticky_kit:unstick",function(e){
+	console.log("has unstuck!", e.target);
+	$(window).off('scroll', scrollHandler );
 });
 
 
