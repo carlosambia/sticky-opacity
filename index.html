@@ -25,7 +25,7 @@ h2{
 	margin: 0 auto;
 }
 
-.modulo-sticky figure{
+.modulo-sticky figure.first{
 	display: block;
 	margin: 0px;
 	width: 100vw;
@@ -36,6 +36,17 @@ h2{
 	background-size: cover;
 }
 
+	
+.modulo-sticky figure.second{
+	display: block;
+	margin: 0px;
+	width: 100vw;
+	height: 100vh;
+	background-image: url("https://images.unsplash.com/photo-1519549735396-e5f6f8ee578c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=35d25dac36ac5de19838c2e22755d0b8&auto=format&fit=crop&w=2550&q=80");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
 
 .sticky-text{
 	z-index: 999;
@@ -90,7 +101,7 @@ h2{
 <div class="container-sticky">
 
 <div class="modulo-sticky">
-	<figure></figure>
+	<figure class="first"></figure>
 </div>
 
 <div class="sticky-text">
@@ -101,7 +112,18 @@ h2{
 </div>
 
 
+<div class="container-sticky">
 
+<div class="modulo-sticky">
+	<figure class="second"></figure>
+</div>
+
+<div class="sticky-text">
+	<h2>Titulo de Módulo</h2>
+	<p>Praesent ut finibus ligula. Proin neque tellus, lobortis a urna ac, pulvinar ornare justo. Donec blandit neque sit amet hendrerit consequat. Proin eu erat facilisis, scelerisque erat at, accumsan velit. Donec non consequat sapien. Sed faucibus, tellus eu rhoncus iaculis, sapien tortor condimentum diam, sit amet convallis justo massa quis tellus. Praesent varius nunc vel lobortis hendrerit. Ut pharetra, ipsum ut mollis vestibulum, mauris justo aliquam turpis, non elementum orci odio a augue. Donec quis nibh vel risus ullamcorper elementum at non leo. Nulla mollis erat eu metus tincidunt euismod. Etiam sed pretium dui. In molestie aliquet tellus. Vivamus non volutpat tortor.</p>
+</div>
+
+</div>
 
 <div class="wrapper encima">
 	<p>
